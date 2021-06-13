@@ -1,25 +1,76 @@
-import logo from './logo.svg';
+import React,{useEffect,useState} from 'react'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+ 
+} from "react-router-dom";
+
+import { Home } from "./pages/Home/Home";
+import { MenuTop } from "./components/MenuTop/MenuTop";
+
 import './App.css';
 
+import {TaskContext} from './providers/TaskContext'
+import { Login } from './pages/Home/Login';
+
+
+
+
+
+
 function App() {
+  
+
+const [todos, setTodos] = useState() 
+    useEffect( ()=> {
+      setTodos(JSON.parse(localStorage.getItem('todos')) || []);
+    }, []);
+
+
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <TaskContext.Provider value={{
+      todos, 
+      setTodos
+    }}>
+     
+     <Users />
+         
+
+        
+    </TaskContext.Provider>
+    
+  )
 }
 
 export default App;
+
+
+
+
+
+function Users() {
+  return (
+    <Router>
+    <MenuTop/>
+
+    <Switch>
+      <Route exact path="/">
+        <Home  />
+      </Route>
+  
+      <Route path="*">
+          <NoMatch />
+        </Route>
+        </Switch>
+      
+    </Router>
+  )
+}
+
+function NoMatch() {
+  return <h2>Error 404</h2>;
+}
