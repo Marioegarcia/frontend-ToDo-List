@@ -71,6 +71,7 @@ const useStyles = makeStyles((theme) => ({
 
 const names = [
     'Mario Garcia',
+    'Luz',
     'Jeremias Garcia',
     'Miriam Wagner',
     'Bruce Wayne',
