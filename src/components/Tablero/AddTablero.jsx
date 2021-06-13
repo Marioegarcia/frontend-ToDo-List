@@ -1,5 +1,5 @@
 import React  from 'react'
-import {makeStyles,useTheme} from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import { TextField,Button } from '@material-ui/core';
 import Chip from '@material-ui/core/Chip';
 import Select from '@material-ui/core/Select';
@@ -92,14 +92,7 @@ const MenuProps = {
   },
 };
 
-function getStyles(name, personName, theme) {
-    return {
-      fontWeight:
-        personName.indexOf(name) === -1
-          ? theme.typography.fontWeightRegular
-          : theme.typography.fontWeightMedium,
-    };
-  }
+
 
 export const AddTablero = ({handleAddTodo,onClose}) => {
     const classes = useStyles();
@@ -109,9 +102,7 @@ export const AddTablero = ({handleAddTodo,onClose}) => {
         dateStart: Date.now(),
         dateEnd: ''
     });
-    const [personName, setPersonName] = React.useState([]);
-
-    const theme = useTheme();
+   
 
 
 
@@ -184,7 +175,7 @@ export const AddTablero = ({handleAddTodo,onClose}) => {
               MenuProps={MenuProps}
             >
               {names.map((name) => (
-                <MenuItem key={name} value={name} style={getStyles(name, personName, theme)}>
+                <MenuItem key={name} value={name} >
                   {name}
                 </MenuItem>
               ))}
